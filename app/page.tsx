@@ -110,11 +110,11 @@ export default function Home() {
   };
 
   return (
-  <main className="min-h-screen bg-gray-50 p-8 text-gray-900">
-    <div className="max-w-2xl mx-auto bg-white shadow-md rounded-2xl p-6">
-      <h1 className="text-3xl font-bold mb-2 text-gray-900">ADA Next.js Demo</h1>
+  <main className="min-h-screen bg-black text-white p-8">
+    <div className="max-w-2xl mx-auto bg-gray-900 shadow-md rounded-2xl p-6">
+      <h1 className="text-3xl font-bold mb-2 text-gray-900">ADA Consortium 2.0</h1>
       <p className="text-gray-700 mb-6">
-        Simple practice app with Next.js, Firebase Auth, and Firestore
+        Hello!
       </p>
 
       {!user ? (
