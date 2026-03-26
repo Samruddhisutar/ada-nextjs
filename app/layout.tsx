@@ -1,4 +1,4 @@
-"use client";
+import "./globals.css";
 
 import { useEffect, useState } from "react";
 import { auth, provider, db } from "@/lib/firebase";
