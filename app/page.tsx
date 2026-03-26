@@ -110,65 +110,64 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-2xl mx-auto bg-white shadow-md rounded-2xl p-6">
-        <h1 className="text-3xl font-bold mb-2">ADA Next.js Demo</h1>
-        <p className="text-gray-600 mb-6">
-          Simple practice app with Next.js, Firebase Auth, and Firestore
-        </p>
+  <main className="min-h-screen bg-gray-50 p-8 text-gray-900">
+    <div className="max-w-2xl mx-auto bg-white shadow-md rounded-2xl p-6">
+      <h1 className="text-3xl font-bold mb-2 text-gray-900">ADA Next.js Demo</h1>
+      <p className="text-gray-700 mb-6">
+        Simple practice app with Next.js, Firebase Auth, and Firestore
+      </p>
 
-        {!user ? (
+      {!user ? (
+        <button
+          onClick={handleGoogleSignIn}
+          className="bg-black text-white px-4 py-2 rounded-xl"
+        >
+          Sign in with Google
+        </button>
+      ) : (
+        <div className="mb-6">
+          <p className="mb-3 text-gray-900">
+            Signed in as <span className="font-semibold text-gray-900">{user.email}</span>
+          </p>
           <button
-            onClick={handleGoogleSignIn}
-            className="bg-black text-white px-4 py-2 rounded-xl"
+            onClick={handleSignOut}
+            className="border border-gray-300 text-gray-900 px-4 py-2 rounded-xl bg-white"
           >
-            Sign in with Google
+            Sign out
           </button>
+        </div>
+      )}
+
+      <form onSubmit={handleAddNote} className="flex flex-col gap-3 mb-8">
+        <textarea
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          placeholder="Write a note..."
+          className="border border-gray-300 rounded-xl p-3 min-h-[100px] text-gray-900 placeholder:text-gray-500 bg-white"
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-blue-600 text-white px-4 py-2 rounded-xl disabled:opacity-50"
+        >
+          {loading ? "Saving..." : "Add Note"}
+        </button>
+      </form>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-3 text-gray-900">Your Notes</h2>
+        {notes.length === 0 ? (
+          <p className="text-gray-600">No notes yet.</p>
         ) : (
-          <div className="mb-6">
-            <p className="mb-3">
-              Signed in as <span className="font-medium">{user.email}</span>
-            </p>
-            <button
-              onClick={handleSignOut}
-              className="border px-4 py-2 rounded-xl"
-            >
-              Sign out
-            </button>
+          <div className="space-y-3">
+            {notes.map((item) => (
+              <div key={item.id} className="border border-gray-300 rounded-xl p-4 bg-white">
+                <p className="text-gray-900">{item.text}</p>
+              </div>
+            ))}
           </div>
         )}
-
-        <form onSubmit={handleAddNote} className="flex flex-col gap-3 mb-8">
-          <textarea
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-            placeholder="Write a note..."
-            className="border rounded-xl p-3 min-h-[100px]"
-          />
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-blue-600 text-white px-4 py-2 rounded-xl disabled:opacity-50"
-          >
-            {loading ? "Saving..." : "Add Note"}
-          </button>
-        </form>
-
-        <div>
-          <h2 className="text-xl font-semibold mb-3">Your Notes</h2>
-          {notes.length === 0 ? (
-            <p className="text-gray-500">No notes yet.</p>
-          ) : (
-            <div className="space-y-3">
-              {notes.map((item) => (
-                <div key={item.id} className="border rounded-xl p-4">
-                  <p>{item.text}</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
       </div>
-    </main>
-  );
-}
+    </div>
+  </main>
+);
